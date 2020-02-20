@@ -1,6 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
 
+const config = require('./config')
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
@@ -41,7 +43,7 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.SourceMapDevToolPlugin({}),
+        ...config.env === config.DEV ? [new webpack.SourceMapDevToolPlugin({})] : [],
 
         new MiniCssExtractPlugin({
             filename: 'bundle.css',
